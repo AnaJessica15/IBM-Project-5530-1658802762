@@ -31,7 +31,9 @@ def y_predict():
 @app.route('/predict', methods = ['POST'])
 def predict_api():
 
-    data = request.get_json(force = True)
+    # data = request.get_json(force = True)
+
+    data = request.json
 
     payload_scoring = {"input_data": [{"field": 'url', "values": y_predict([np.array(list(data.values()))])}]}
     response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/29c08d03-9cdb-4113-86fa-67750be82b72/predictions?version=2022-10-18', json=payload_scoring,headers={'Authorization': 'Bearer ' + mltoken})
