@@ -4,9 +4,12 @@ from markupsafe import escape
 import pickle
 import inputScript   #inputScript file - to analyze the URL
 import requests
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
-API_KEY = "z9W233d1IzKQln7pNbPLagwK1M9sChdB893Z_zWTXeGN"
+API_KEY = os.getenv('API_KEY')
 token_response = requests.post('https://iam.cloud.ibm.com/identity/token', data={"apikey":API_KEY, "grant_type": 'urn:ibm:params:oauth:grant-type:apikey'})
 mltoken = token_response.json()["access_token"]
 
@@ -28,7 +31,7 @@ def y_predict():
     check_predic = inputScript.main(url)
 
     payload_scoring = {"input_data": [{"field": 'check_predic', "values": check_predic}]}
-    response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/29c08d03-9cdb-4113-86fa-67750be82b72/predictions?version=2022-10-18', json=payload_scoring,headers={'Authorization': 'Bearer ' + mltoken})
+    response_scoring = requests.post(os.getenv('DEPLOYMENT_LINK'), json=payload_scoring,headers={'Authorization': 'Bearer ' + mltoken})
 
 
     # model = joblib.load('/home/ana/ana/web-phishing-detection/phishing_website.pkl')
