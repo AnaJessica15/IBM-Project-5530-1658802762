@@ -3,10 +3,15 @@ from flask import Flask, render_template, request, redirect, jsonify
 from markupsafe import escape
 import pickle
 import inputScript   #inputScript file - to analyze the URL
+import os
+from pathlib import Path
 
 app = Flask(__name__)
 
-model = pickle.load(open("/home/ana/ana/IBM-Project-5530-1658802762/Project Development Phase/Sprint 3/flask/phishing_website.pkl","rb"))
+current_directory = Path(".")
+file = os.path.join(current_directory,'phishing_website.pkl')
+
+model = pickle.load(open(file,"rb"))
 
 # user-inputs the URL in this page
 @app.route('/')
