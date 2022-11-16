@@ -4,7 +4,7 @@ Jinja2==2.11.2
 Werkzeug==1.0.1
 markupsafe==2.0.1
 itsdangerous==2.0.1
-scikit-learn==0.22.2.post1
+scikit-learn==1.0.1
 numpy
 pickle5
 regex 
