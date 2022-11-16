@@ -8,10 +8,10 @@ from pathlib import Path
 
 app = Flask(__name__)
 
-current_directory = Path(".")
-file = os.path.join(current_directory,'phishing_website.pkl')
+# current_directory = Path(".")
+# file = os.path.join(current_directory,'phishing_website.pkl')
 
-model = pickle.load(open(file,"rb"))
+model = pickle.load(open("Final Deliverables/code - local deployment/flask/phishing_website.pkl","rb"))
 
 # user-inputs the URL in this page
 @app.route('/')
